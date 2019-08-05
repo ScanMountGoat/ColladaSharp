@@ -54,11 +54,11 @@ namespace ColladaSharp
                     var unit = asset.UnitElement;
                     var coord = asset.UpAxisElement;
 
-                    if (unit != null)
-                    {
-                        WriteLine($"Units: {unit.Name} (to meters: {unit.Meter.ToString()})");
-                        baseTransform = baseTransform * Matrix4.CreateScale(unit.Meter);
-                    }
+                    //if (unit != null)
+                    //{
+                    //    WriteLine($"Units: {unit.Name} (to meters: {unit.Meter.ToString()})");
+                    //    baseTransform = baseTransform * Matrix4.CreateScale(unit.Meter);
+                    //}
                     if (coord != null)
                     {
                         WriteLine("Up axis: " + coord.StringContent.Value.ToString());
@@ -368,18 +368,19 @@ namespace ColladaSharp
                     data.GenerateBinormalTangentBuffers(0, 0, addBinormals, addTangents);
 
                 Material material = null;
-                var instanceMats = _inst?.BindMaterialElement?.TechniqueCommonElement?.InstanceMaterialElements;
-                if (instanceMats != null && instanceMats.Length > 0)
-                {
-                    var instanceMat = instanceMats[0];
-                    var colladaMaterial = instanceMat?.Target?.GetElement<LibraryMaterials.Material>(scene.Root);
-                    if (colladaMaterial != null)
-                        material = CreateMaterial(colladaMaterial);
-                }
+                //var instanceMats = _inst?.BindMaterialElement?.TechniqueCommonElement?.InstanceMaterialElements;
+                //if (instanceMats != null && instanceMats.Length > 0)
+                //{
+                //    var instanceMat = instanceMats[0];
+                //    var colladaMaterial = instanceMat?.Target?.GetElement<LibraryMaterials.Material>(scene.Root);
+                //    if (colladaMaterial != null)
+                //        material = CreateMaterial(colladaMaterial);
+                //}
                 
                 model.Children.Add(new SubMesh(_node.Name ?? _node.ID ?? _node.SID, data, material));
             }
         }
+
         private static Material CreateMaterial(LibraryMaterials.Material colladaMaterial)
         {
             //TODO: better material information support
